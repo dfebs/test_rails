@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resources :products # This does the same the get/post/put/patch/delete stuff commented out below
+  resources :products do # This does the same the get/post/put/patch/delete stuff commented out below
+    resources :subscribers, only: [ :create ]
+  end
   root "products#index"
   #   get "/products", to: "products#index"
 

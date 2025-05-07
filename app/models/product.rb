@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    has_many :subscribers, dependent: :destroy
     has_rich_text :description
     has_one_attached :featured_image
     has_many :subscribers, dependent: :destroy
