@@ -6,10 +6,13 @@
 
 <%= image_tag @product.featured_image if @product.featured_image.attached?%>
 
-<p>Subscribe here for updates!</p>
-<%= form_with model: [@product, Subscriber.new] do |form| %>
-    <%= form.email_field :email, placeholder: "you@example.com", required: true %>
-    <%= form.submit "Submit"%>
+
+<% if authenticated? && !@product.subscribers.exists?(email: Current.user.email_address) %>
+    <p>Subscribe here for updates!</p>
+    <%= form_with model: [@product, Subscriber.new] do |form| %>
+        <%= form.email_field :email, placeholder: "you@example.com", required: true %>
+        <%= form.submit "Submit"%>
+    <% end %>
 <% end %>
 
 <%= link_to "Back", products_path %>
